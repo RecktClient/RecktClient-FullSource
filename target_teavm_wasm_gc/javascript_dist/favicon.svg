@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="8" fill="#0d0d0d"/>
+  <!-- Red accent border -->
+  <rect x="2" y="2" width="60" height="60" rx="7" fill="none" stroke="#cc2222" stroke-width="2"/>
+  <!-- R lettermark -->
+  <rect x="12" y="12" width="8" height="40" rx="2" fill="#ffffff"/>
+  <rect x="12" y="12" width="24" height="8" rx="2" fill="#cc2222"/>
+  <rect x="28" y="12" width="8" height="22" rx="2" fill="#cc2222"/>
+  <rect x="12" y="26" width="24" height="8" rx="2" fill="#cc2222"/>
+  <!-- Diagonal leg of R -->
+  <polygon points="22,34 36,52 44,52 30,34" fill="#cc2222"/>
+  <!-- Small "C" indicator bottom right -->
+  <circle cx="46" cy="44" r="10" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="50 15" stroke-dashoffset="-5"/>
+</svg>
