@@ -1,162 +1,125 @@
 <!DOCTYPE html>
 <html style="width:100%;height:100%;background-color:#0a0a0a;">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-		<meta name="description" content="RecktClient WASM - The ultimate 1.8 PvP client with 200+ modules. Made by wasd.isgoose on Discord." />
-		<meta name="keywords" content="recktclient, eaglercraft, minecraft, 1.8, pvp, fps, client, wasm, webassembly" />
-		<title>RecktClient WASM | Play Now</title>
-		<meta property="og:locale" content="en-US" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="RecktClient WASM - 1.8 PvP Client" />
-		<meta property="og:description" content="200+ modules. WebAssembly powered. Made by wasd.isgoose. Press Right Shift in-game to open the GUI." />
-		<link type="image/svg+xml" rel="icon" href="favicon.svg" />
-		<link type="image/png" rel="shortcut icon" href="favicon.png" />
-		<style>
-			* { margin: 0; padding: 0; box-sizing: border-box; }
-			body {
-				width: 100%; height: 100%; overflow: hidden;
-				background: #0a0a0a;
-				font-family: 'Segoe UI', Arial, sans-serif;
-			}
-			#loading-screen {
-				position: fixed; inset: 0;
-				background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 50%, #0a0a0a 100%);
-				display: flex; flex-direction: column;
-				align-items: center; justify-content: center;
-				z-index: 9999; color: white;
-			}
-			.rc-logo {
-				font-size: 52px; font-weight: 900; letter-spacing: -2px;
-				color: #fff; text-shadow: 0 0 30px #cc2222, 0 0 60px #cc222266;
-				margin-bottom: 6px;
-			}
-			.rc-logo span { color: #cc2222; }
-			.rc-badge {
-				background: #cc2222; color: #fff; font-size: 10px; font-weight: 700;
-				padding: 2px 8px; border-radius: 2px; letter-spacing: 2px;
-				text-transform: uppercase; margin-bottom: 6px;
-			}
-			.rc-tagline {
-				color: #888; font-size: 13px; margin-bottom: 30px; letter-spacing: 2px;
-				text-transform: uppercase;
-			}
-			.rc-bar-wrap {
-				width: 280px; height: 4px; background: #1a1a1a; border-radius: 2px; overflow: hidden;
-				margin-bottom: 12px;
-			}
-			.rc-bar {
-				height: 100%; width: 0%; background: linear-gradient(90deg, #cc2222, #ff4444);
-				border-radius: 2px;
-			}
-			.rc-status { color: #555; font-size: 11px; letter-spacing: 1px; }
-			.rc-error { color: #cc2222; font-size: 13px; margin-top: 16px; display: none; }
-		</style>
-		<script type="text/javascript">
-			"use strict";
-			window.addEventListener("load", async function() {
-				const loadScreen = document.getElementById("loading-screen");
-				const bar = document.querySelector(".rc-bar");
-				const status = document.querySelector(".rc-status");
-				const errorDiv = document.querySelector(".rc-error");
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="description" content="RecktClient WASM - The ultimate 1.8 PvP client with 200+ modules. Made by wasd.isgoose on Discord." />
+<meta name="keywords" content="recktclient, eaglercraft, minecraft, 1.8, pvp, fps, client, wasm, webassembly" />
+<title>RecktClient WASM | Play Now</title>
+<meta property="og:locale" content="en-US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="RecktClient WASM - 1.8 PvP Client" />
+<meta property="og:description" content="200+ modules. WebAssembly powered. Made by wasd.isgoose. Press Right Shift in-game to open the GUI." />
+<link type="image/svg+xml" rel="icon" href="favicon.svg" />
+<link type="image/png" rel="shortcut icon" href="favicon.png" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; font-family: 'Segoe UI', Arial, sans-serif; }
+#loading-screen {
+  position: fixed; inset: 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 50%, #0a0a0a 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 9999; color: white;
+}
+.rc-logo { font-size: 52px; font-weight: 900; letter-spacing: -2px; color: #fff; text-shadow: 0 0 30px #cc2222, 0 0 60px #cc222266; margin-bottom: 6px; }
+.rc-logo span { color: #cc2222; }
+.rc-badge { background: #cc2222; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.rc-tagline { color: #888; font-size: 13px; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; }
+.rc-bar-wrap { width: 280px; height: 4px; background: #1a1a1a; border-radius: 2px; overflow: hidden; margin-bottom: 12px; }
+.rc-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #cc2222, #ff4444); border-radius: 2px; transition: width 0.3s ease; }
+.rc-status { color: #555; font-size: 11px; letter-spacing: 1px; }
+.rc-error { color: #ff6666; font-size: 13px; margin-top: 18px; display: none; text-align: center; max-width: 340px; line-height: 1.6; }
+.rc-error a { color: #ff9999; }
+</style>
+<script type="text/javascript">
+"use strict";
+window.addEventListener("load", async function() {
+  var bar = document.querySelector(".rc-bar");
+  var status = document.querySelector(".rc-status");
+  var errorDiv = document.querySelector(".rc-error");
 
-				function setProgress(pct, msg) {
-					if (bar) bar.style.width = pct + "%";
-					if (status && msg) status.textContent = msg;
-				}
+  function setProgress(pct, msg) {
+    if (bar) bar.style.width = pct + "%";
+    if (status && msg) status.textContent = msg;
+  }
 
-				if(typeof WebAssembly === "undefined" || typeof WebAssembly.Suspending === "undefined") {
-					if(errorDiv) {
-						errorDiv.style.display = "block";
-						errorDiv.textContent = "JSPI not supported. Enable it in chrome://flags or use the JavaScript version.";
-					}
-					setProgress(0, "Error: JSPI required - see chrome://flags");
-					return;
-				}
+  // Check JSPI support (required for WASM-GC build)
+  if (typeof WebAssembly === "undefined" || typeof WebAssembly.Suspending === "undefined") {
+    if (errorDiv) {
+      errorDiv.style.display = "block";
+      errorDiv.innerHTML =
+        "JSPI is required for the WASM build.<br>" +
+        "Open <b>chrome://flags</b> and enable<br>" +
+        "<b>#enable-experimental-webassembly-jspi</b><br>" +
+        "then relaunch Chrome.<br><br>" +
+        "Or open <a href='enableJSPIScreen.html'>the JSPI setup guide</a>.";
+    }
+    setProgress(0, "Error: JSPI not enabled — see message below");
+    return;
+  }
 
-				setProgress(10, "Initializing RecktClient WASM...");
+  setProgress(10, "Downloading assets...");
 
-				const splash = document.createElement("div");
-				splash.style.cssText = "width:100%;height:100%;imageRendering:pixelated;background:center/contain no-repeat url(splash.png),0 0/1000000% 1000000% no-repeat url(splash.png) #0a0a0a;";
-				document.body.appendChild(splash);
+  var assetsEPK;
+  try {
+    var resp = await fetch("assets.epk");
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    assetsEPK = new Uint8Array(await resp.arrayBuffer());
+  } catch (ex) {
+    if (errorDiv) {
+      errorDiv.style.display = "block";
+      errorDiv.textContent = "Could not download assets.epk. Make sure you are on a web server (not file://) and the compiled files are present.";
+    }
+    setProgress(0, "Failed to load assets");
+    console.error("assets.epk fetch failed:", ex);
+    return;
+  }
 
-				setProgress(20, "Downloading assets...");
-				var assetsEPK;
-				try {
-					assetsEPK = new Uint8Array(await fetch("assets.epk").then(resp => resp.arrayBuffer()));
-				} catch(ex) {
-					if(errorDiv) { errorDiv.style.display="block"; errorDiv.textContent = "Could not download assets.epk!"; }
-					setProgress(0, "Failed to load assets");
-					console.error(ex);
-					return;
-				}
-				setProgress(70, "Assets loaded - starting game...");
+  setProgress(85, "Starting WASM engine...");
 
-				const relayId = Math.floor(Math.random() * 3);
-				const eaglercraftXOpts = {
-					demoMode: false,
-					localesURI: "lang/",
-					worldsDB: "worlds",
-					servers: [
-						{ addr: "ws://localhost:8081/", name: "Local test server" }
-					],
-					relays: [
-						{ addr: "wss://relay.deev.is/", comment: "lax1dude relay #1", primary: relayId === 0 },
-						{ addr: "wss://relay.lax1dude.net/", comment: "lax1dude relay #2", primary: relayId === 1 },
-						{ addr: "wss://relay.shhnowisnottheti.me/", comment: "ayunami relay #1", primary: relayId === 2 }
-					]
-				};
+  var relayId = Math.floor(Math.random() * 3);
 
-				window.__eaglercraftXLoaderContext = {
-					getEaglercraftXOpts: function() { return eaglercraftXOpts; },
-					getEagRuntimeJSURL: function() { return "eagruntime.js"; },
-					getClassesWASMURL: function() { return "classes.wasm"; },
-					getClassesDeobfWASMURL: function() { return "classes.wasm-deobfuscator.wasm"; },
-					getClassesTEADBGURL: function() { return "classes.wasm.teadbg"; },
-					getEPKFiles: function() {
-						return [{ name: "assets.epk", path: "", data: assetsEPK }];
-					},
-					getRootElement: function() { return document.body; },
-					getMainArgs: function() { return []; },
-					getImageURL: function(idx) {
-						switch(idx) {
-							case 0: return "splash.png";
-							case 1: return "pressAnyKey.png";
-							case 2: return "crashLogo.png";
-							case 3: return "favicon.png";
-							default: return null;
-						}
-					},
-					runMain: function(fn) { setTimeout(fn, 10); }
-				};
+  // __eaglercraftXLoaderContextPre is the correct API for loader.js
+  window.__eaglercraftXLoaderContextPre = {
+    loaderWASMURL: "loader.wasm",
+    rootElement: document.body,
+    eaglercraftXOpts: {
+      worldsDB: "worlds",
+      relays: [
+        { addr: "wss://relay.deev.is/",               comment: "lax1dude relay #1", primary: relayId === 0 },
+        { addr: "wss://relay.lax1dude.net/",           comment: "lax1dude relay #2", primary: relayId === 1 },
+        { addr: "wss://relay.shhnowisnottheti.me/",    comment: "ayunami relay #1",  primary: relayId === 2 }
+      ]
+    },
+    theEPWFileBuffer: assetsEPK,
+    splashURL: "splash.png"
+  };
 
-				var q = window.location.search;
-				if((typeof q === "string") && q[0] === "?" && (typeof URLSearchParams !== "undefined")) {
-					q = new URLSearchParams(q);
-					var s = q.get("server");
-					if(s) eaglercraftXOpts.joinServer = s;
-				}
+  // Handle ?server= query param
+  var q = window.location.search;
+  if (typeof q === "string" && q[0] === "?" && typeof URLSearchParams !== "undefined") {
+    var s = new URLSearchParams(q).get("server");
+    if (s) window.__eaglercraftXLoaderContextPre.eaglercraftXOpts.joinServer = s;
+  }
 
-				setProgress(90, "Launching RecktClient...");
-				setTimeout(function() {
-					if(loadScreen) loadScreen.style.display = "none";
-				}, 500);
+  setProgress(95, "Launching RecktClient...");
 
-				const scriptElement = document.createElement("script");
-				scriptElement.type = "text/javascript";
-				scriptElement.src = "eagruntime.js";
-				document.head.appendChild(scriptElement);
-			});
-		</script>
-	</head>
-	<body style="margin:0px;width:100%;height:100%;overflow:hidden;background-color:#0a0a0a;" id="game_frame">
-		<div id="loading-screen">
-			<div class="rc-logo"><span>Reckt</span>Client</div>
-			<div class="rc-badge">WebAssembly Edition</div>
-			<div class="rc-tagline">200+ Modules &bull; Made by wasd.isgoose &bull; WASM</div>
-			<div class="rc-bar-wrap"><div class="rc-bar"></div></div>
-			<div class="rc-status">Initializing...</div>
-			<div class="rc-error"></div>
-		</div>
-	</body>
+  // loader.js takes over: it removes body children and reuses #loading-screen as the WASM splash
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "loader.js";
+  document.head.appendChild(script);
+});
+</script>
+</head>
+<body style="margin:0px;width:100%;height:100%;overflow:hidden;background-color:#0a0a0a;" id="game_frame">
+<div id="loading-screen">
+  <div class="rc-logo"><span>Reckt</span>Client</div>
+  <div class="rc-badge">WebAssembly Edition</div>
+  <div class="rc-tagline">200+ Modules &bull; Made by wasd.isgoose &bull; WASM</div>
+  <div class="rc-bar-wrap"><div class="rc-bar"></div></div>
+  <div class="rc-status">Initializing...</div>
+  <div class="rc-error"></div>
+</div>
+</body>
 </html>
