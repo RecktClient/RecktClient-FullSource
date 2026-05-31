@@ -1,103 +1,91 @@
 <!DOCTYPE html>
 <html style="width:100%;height:100%;background-color:#0a0a0a;">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-		<meta name="description" content="RecktClient - The ultimate 1.8 PvP client with 200+ modules. Made by wasd.isgoose on Discord." />
-		<meta name="keywords" content="recktclient, eaglercraft, minecraft, 1.8, pvp, fps, client, modules" />
-		<title>RecktClient | Play Now</title>
-		<meta property="og:locale" content="en-US" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="RecktClient - 1.8 PvP Client" />
-		<meta property="og:description" content="200+ modules. Red and white. Made by wasd.isgoose. Press Right Shift in-game to open the GUI." />
-		<link type="image/svg+xml" rel="icon" href="favicon.svg" />
-		<link type="image/png" rel="shortcut icon" href="favicon.png" />
-		<style>
-			* { margin: 0; padding: 0; box-sizing: border-box; }
-			body {
-				width: 100%; height: 100%; overflow: hidden;
-				background: #0a0a0a;
-				font-family: 'Segoe UI', Arial, sans-serif;
-			}
-			#loading-screen {
-				position: fixed; inset: 0;
-				background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 50%, #0a0a0a 100%);
-				display: flex; flex-direction: column;
-				align-items: center; justify-content: center;
-				z-index: 9999;
-				transition: opacity 0.5s ease;
-			}
-			#loading-screen.hidden { opacity: 0; pointer-events: none; }
-			.rc-logo {
-				font-size: 52px; font-weight: 900; letter-spacing: -2px;
-				color: #fff; text-shadow: 0 0 30px #cc2222, 0 0 60px #cc222266;
-				margin-bottom: 6px;
-			}
-			.rc-logo span { color: #cc2222; }
-			.rc-tagline {
-				color: #888; font-size: 13px; margin-bottom: 30px; letter-spacing: 2px;
-				text-transform: uppercase;
-			}
-			.rc-bar-wrap {
-				width: 260px; height: 4px; background: #1a1a1a; border-radius: 2px; overflow: hidden;
-				margin-bottom: 12px;
-			}
-			.rc-bar {
-				height: 100%; width: 0%; background: linear-gradient(90deg, #cc2222, #ff4444);
-				border-radius: 2px; animation: rcload 2s ease-in-out forwards;
-			}
-			@keyframes rcload { to { width: 100%; } }
-			.rc-status { color: #555; font-size: 11px; letter-spacing: 1px; }
-			#game_frame { width: 100%; height: 100%; }
-		</style>
-		<script type="text/javascript" src="classes.js"></script>
-		<script type="text/javascript">
-			"use strict";
-			window.addEventListener("load", function() {
-				
-					var relayId = Math.floor(Math.random() * 3);
-					window.eaglercraftXOpts = {
-						demoMode: false,
-						container: "game_frame",
-						assetsURI: "assets.epk",
-						localesURI: "lang/",
-						worldsDB: "worlds",
-						logInvalidCerts: true,
-						crashOnUncaughtExceptions: true,
-						servers: [
-							{ addr: "ws://localhost:8081/", name: "Local test server" }
-						],
-						relays: [
-							{ addr: "wss://relay.deev.is/", comment: "lax1dude relay #1", primary: relayId === 0 },
-							{ addr: "wss://relay.lax1dude.net/", comment: "lax1dude relay #2", primary: relayId === 1 },
-							{ addr: "wss://relay.shhnowisnottheti.me/", comment: "ayunami relay #1", primary: relayId === 2 }
-						]
-					};
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="description" content="RecktClient - The ultimate 1.8 PvP client with 200+ modules. Made by wasd.isgoose on Discord." />
+<meta name="keywords" content="recktclient, eaglercraft, minecraft, 1.8, pvp, fps, client, modules" />
+<title>RecktClient | Play Now</title>
+<meta property="og:locale" content="en-US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="RecktClient - 1.8 PvP Client" />
+<meta property="og:description" content="200+ modules. Red and white. Made by wasd.isgoose. Press Right Shift in-game to open the GUI." />
+<link type="image/svg+xml" rel="icon" href="favicon.svg" />
+<link type="image/png" rel="shortcut icon" href="favicon.png" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; font-family: 'Segoe UI', Arial, sans-serif; }
+#loading-screen {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 50%, #0a0a0a 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.6s ease;
+}
+#loading-screen.fade { opacity: 0; pointer-events: none; }
+.rc-logo { font-size: 52px; font-weight: 900; letter-spacing: -2px; color: #fff; text-shadow: 0 0 30px #cc2222, 0 0 60px #cc222266; margin-bottom: 6px; }
+.rc-logo span { color: #cc2222; }
+.rc-badge { background: #cc2222; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 2px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.rc-tagline { color: #888; font-size: 13px; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; }
+.rc-bar-wrap { width: 280px; height: 4px; background: #1a1a1a; border-radius: 2px; overflow: hidden; margin-bottom: 12px; }
+.rc-bar { height: 100%; background: linear-gradient(90deg, #cc2222, #ff4444); border-radius: 2px; animation: rcfill 3s ease-in-out forwards; }
+@keyframes rcfill { 0% { width: 0% } 60% { width: 70% } 100% { width: 100% } }
+.rc-status { color: #555; font-size: 11px; letter-spacing: 1px; }
+</style>
+<script type="text/javascript" src="classes.js"></script>
+<script type="text/javascript">
+"use strict";
+window.addEventListener("load", function() {
+  var relayId = Math.floor(Math.random() * 3);
 
-					var q = window.location.search;
-					if((typeof q === "string") && q[0] === "?" && (typeof window.URLSearchParams !== "undefined")) {
-						q = new window.URLSearchParams(q);
-						var s = q.get("server");
-						if(s) window.eaglercraftXOpts.joinServer = s;
-					}
+  window.eaglercraftXOpts = {
+    container: "game_canvas",
+    assetsURI: "assets.epk",
+    localesURI: "lang/",
+    worldsDB: "worlds",
+    logInvalidCerts: true,
+    crashOnUncaughtExceptions: true,
+    servers: [],
+    relays: [
+      { addr: "wss://relay.deev.is/",            comment: "lax1dude relay #1", primary: relayId === 0 },
+      { addr: "wss://relay.lax1dude.net/",        comment: "lax1dude relay #2", primary: relayId === 1 },
+      { addr: "wss://relay.shhnowisnottheti.me/", comment: "ayunami relay #1",  primary: relayId === 2 }
+    ]
+  };
 
-					setTimeout(function() {
-						var ls = document.getElementById("loading-screen");
-						if (ls) ls.classList.add("hidden");
-						setTimeout(function() { if (ls) ls.remove(); }, 600);
-					}, 2200);
+  var q = window.location.search;
+  if (typeof q === "string" && q[0] === "?" && typeof URLSearchParams !== "undefined") {
+    var s = new URLSearchParams(q).get("server");
+    if (s) window.eaglercraftXOpts.joinServer = s;
+  }
 
-					main();
-				}
-			});
-		</script>
-	</head>
-	<body style="margin:0px;width:100%;height:100%;overflow:hidden;background-color:#0a0a0a;" id="game_frame">
-		<div id="loading-screen">
-			<div class="rc-logo"><span>Reckt</span>Client</div>
-			<div class="rc-tagline">200+ Modules &bull; Made by wasd.isgoose &bull; JavaScript</div>
-			<div class="rc-bar-wrap"><div class="rc-bar"></div></div>
-			<div class="rc-status">Loading client... Press Right Shift in-game to open the GUI</div>
-		</div>
-	</body>
+  // Start the game
+  main();
+
+  // Fade out our loading screen once the game canvas appears
+  var tries = 0;
+  var fadeInterval = setInterval(function() {
+    var canvas = document.getElementById("game_canvas") && document.querySelector("#game_canvas canvas");
+    tries++;
+    if (canvas || tries > 60) {
+      clearInterval(fadeInterval);
+      var ls = document.getElementById("loading-screen");
+      if (ls) {
+        ls.classList.add("fade");
+        setTimeout(function() { if (ls.parentNode) ls.parentNode.removeChild(ls); }, 700);
+      }
+    }
+  }, 300);
+});
+</script>
+</head>
+<body style="margin:0px;width:100%;height:100%;overflow:hidden;background-color:#0a0a0a;">
+<div id="loading-screen">
+  <div class="rc-logo"><span>Reckt</span>Client</div>
+  <div class="rc-badge">JavaScript Edition</div>
+  <div class="rc-tagline">200+ Modules &bull; Made by wasd.isgoose &bull; JS</div>
+  <div class="rc-bar-wrap"><div class="rc-bar"></div></div>
+  <div class="rc-status">Loading client... Right Shift in-game opens the GUI</div>
+</div>
+<div id="game_canvas" style="width:100%;height:100%;"></div>
+</body>
 </html>
